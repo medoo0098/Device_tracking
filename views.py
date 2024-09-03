@@ -21,6 +21,8 @@ login_manager.init_app(app)
 
 
 
+
+
 # path to the md.csv to populate the database with ipad information, asset id and serial number.
 file_path = r"\\192.168.16.16\MAC\mdAssetList.csv"
 
