@@ -1,4 +1,4 @@
-from config import db
+from main import db
 from flask_login import UserMixin
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Integer, String

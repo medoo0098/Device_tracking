@@ -1,5 +1,4 @@
-from config import app
-from config import db
+from main import app, db
 from flask import render_template, redirect, url_for, flash, request, send_from_directory
 from forms import (RegisterForm, LoginForm, ScanForm, AssignForm, RenameUpdateForm, AddForm, SearchForm, ShowDB,
                    ReturnedForm, ExportForm, EditForm)
