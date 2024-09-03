@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
-
+from views import init_routes
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
@@ -30,9 +30,15 @@ with app.app_context():
     db.create_all()
     print("db is created")
 
+init_routes(app, db)
 
+
+print("executed line")
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5001)
-
+    print("1")
+    app.run(debug=True, host="0.0.0.0", port=5002)
     print("app running")
+else:
+    print("not running")
 
+print("its here now")
