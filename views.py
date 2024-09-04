@@ -11,6 +11,10 @@ import datetime
 from werkzeug.utils import secure_filename
 from config import db
 
+# Route to assign the assets to location.
+asset_list = []
+scanned_returned_items = []
+
 
 def init_routes(app):
 
@@ -24,8 +28,7 @@ def init_routes(app):
     # path to the md.csv to populate the database with ipad information, asset id and serial number.
     file_path = r"\\192.168.16.16\MAC\mdAssetList.csv"
 
-    # Route to assign the assets to location.
-    asset_list = []
+    
 
 
 
@@ -426,7 +429,7 @@ def init_routes(app):
         return render_template("show_db.html", all_assets=assets, current_user=current_user, table_headers=table_headers)
 
 
-    scanned_returned_items = []
+    
     @app.route("/returned", methods=["GET", "POST"])
     def returned():
         global scanned_returned_items
