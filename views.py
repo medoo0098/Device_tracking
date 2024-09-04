@@ -12,11 +12,11 @@ from werkzeug.utils import secure_filename
 from config import db
 
 
-def init_routes(app):
 
-    # Configure Flask-Login
-    login_manager = LoginManager(app)
-    login_manager.login_view = "login"
+
+# Configure Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 
