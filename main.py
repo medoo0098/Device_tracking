@@ -1,38 +1,28 @@
+from config import Config, db
 from flask import Flask
+from views import init_routes
+from models import User, ModDem
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
 
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase
+
+def create_app():
+    app = Flask(__name__)  # initilizing flask app
+    
+    app.config.from_object(Config)  # reading config from Config object created in config.py
+    db.init_app(app)  # initialising database within the app , created in config.py
+    ckeditor = CKEditor(app)
+    Bootstrap5(app)
+    with app.app_context():  # within the app context we are creating tables, (all) created in models.py 
+        db.create_all()  # fucntion to create all tables (models from models,py)
+    
+    init_routes(app)  # the fucntion to route all routes in a function called init route, created in routes.py
+
+    return app  # app in returned as an value 
 
 
-# CREATE DATABASE
-class Base(DeclarativeBase):
-    pass
+app = create_app()  # from fonction create app, flask app is being created
 
 
-# initiating the flask app
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MD.db'
-ckeditor = CKEditor(app)
-Bootstrap5(app)
-
-
-# creating database in instance folder in application man folder
-
-db = SQLAlchemy(model_class=Base)
-db.init_app(app)
-
-
-# creating all databases if not existing
-with app.app_context():
-    db.create_all()
-    print("db is created")
-
-
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5001)
-
-    print("app running")
-
+if __name__ == "__main__":  # 
+    app.run(host="0.0.0.0", port=5001)
